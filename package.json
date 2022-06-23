@@ -1,0 +1,19 @@
+{
+  "name": "callback",
+  "version": "0.0.1",
+  "main": "dist/callback.cjs.js",
+  "module": "dist/callback.esm.js",
+  "description": "Little TypeScript library of callback functions, mostly for array methods like map/filter/reduce and sort.",
+  "repository": "git@github.com:kevinmaes/callback",
+  "author": "Kevin Maes <kevin@kevinmaes.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "yarn preconstruct build"
+  },
+  "dependencies": {
+    "typescript": "^4.7.4"
+  },
+  "devDependencies": {
+    "@preconstruct/cli": "^2.1.5"
+  }
+}
