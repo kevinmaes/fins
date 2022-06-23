@@ -8,12 +8,59 @@
   "license": "MIT",
   "scripts": {
     "clean": "rm -rf dist",
-    "build": "yarn clean && yarn tsup src/index.ts --format esm,cjs,iife"
+    "build": "yarn clean && yarn tsup src/index.ts --format esm,cjs,iife",
+    "test": "node --expose-gc ./node_modules/.bin/jest"
   },
   "dependencies": {
     "typescript": "^4.7.4"
   },
   "devDependencies": {
+    "@types/jest": "^28.1.3",
+    "jest": "^28.1.1",
+    "ts-jest": "^28.0.5",
     "tsup": "^6.1.2"
+  },
+  "jest": {
+    "globals": {
+      "ts-jest": {
+        "isolatedModules": true
+      }
+    },
+    "automock": false,
+    "verbose": true,
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ],
+    "transform": {
+      "^.+\\.(js)$": "<rootDir>/node_modules/babel-jest",
+      "\\.(ts|tsx)$": "ts-jest"
+    },
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "./src/**/*.{ts,js,tsx}"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 80,
+        "functions": 80,
+        "lines": 80,
+        "statements": 80
+      }
+    },
+    "coveragePathIgnorePatterns": [
+      "index.ts"
+    ],
+    "testRegex": "(src/.*.(test|spec)).(ts|tsx|js)$",
+    "testPathIgnorePatterns": [
+      "\\.snap$",
+      "<rootDir>/node_modules/",
+      "<rootDir>/artifacts/"
+    ],
+    "cacheDirectory": ".jest/cache"
   }
 }

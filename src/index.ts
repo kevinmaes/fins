@@ -1,1 +1,1 @@
-export const hello = (): string => 'Hello, world!';
+export * from './filterMap';
