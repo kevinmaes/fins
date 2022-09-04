@@ -1,8 +1,8 @@
 // eslint-disable-next-line import/no-unused-modules
-export type InsertIf<Element> = (
-  elements: Element | Element[],
+export type InsertIf<TElement> = (
+  elements: TElement | TElement[],
   condition: boolean
-) => Element[];
+) => TElement[];
 
 /**
  * Conditionally insert one or more elements into an array.
