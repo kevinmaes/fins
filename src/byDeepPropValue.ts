@@ -5,6 +5,19 @@ interface Options {
   matchUndefined?: boolean;
 }
 
+type NestedObj<TObj> = Record<string, TObj[keyof TObj] | Record<string, TObj>>;
+
+// type NestedValue<TObj> = TObj[keyof TObj] | NestedValue<TObj>];
+type NestedValue<TObj> = NestedObj<TObj>;
+
+// type ValueOrObj<TValue> = TValue | Record<string, ValueOrObj<TValue>>;
+
+// const obj1: ValueOrObj<string> = {
+//   prop: {
+//     prop: 'value',
+//   },
+// }
+
 /**
  *
  * @param propName String name of the object property to look up.
@@ -13,15 +26,10 @@ interface Options {
  * @param insensitive For strings, whether matching is case-insensitive, default is false.
  * @returns A function that takes an object argument and returns a boolean as to if a match was found.
  */
-
 export const byDeepPropValue =
-  <TObj>(
-    // path: string extends keyof TObj ? string : never,
-    path: string extends keyof TObj ? keyof Element : string,
-    value: TObj[keyof TObj],
-    // value:
-    //   | TObj[keyof TObj]
-    //   | TObj[keyof TObj][keyof TObj[keyof TObj]],
+  <TObj extends Record<string, any>>(
+    path: keyof NestedObj<TObj>,
+    value: NestedValue<TObj> | any,
     { caseInsensitive, matchUndefined }: Options = {
       caseInsensitive: false,
       matchUndefined: false,
@@ -32,18 +40,21 @@ export const byDeepPropValue =
     const pathArrayLength = pathArray.length;
 
     if (path in obj) {
-      const predicate = byPropValue(path as keyof TObj, value, {
-        caseInsensitive,
-        matchUndefined,
-      });
+      const predicate = byPropValue(
+        path as keyof TObj,
+        value as TObj[keyof TObj],
+        {
+          caseInsensitive,
+          matchUndefined,
+        }
+      );
       const result = predicate(obj);
       return result;
     } else {
       const nextLevelObj = obj[pathArray[0] as keyof TObj];
       const predicate = byPropValue<typeof nextLevelObj>(
         pathArray[1] as keyof typeof nextLevelObj,
-        // pathArray[1],
-        value,
+        value as typeof nextLevelObj[keyof typeof nextLevelObj],
         {
           caseInsensitive,
           matchUndefined,
