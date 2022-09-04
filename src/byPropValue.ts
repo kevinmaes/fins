@@ -64,11 +64,10 @@ export const byPropValue =
     }
   ) =>
   (obj: TObj): boolean => {
-    const pathArray = path.split('.');
-    const currentPath = pathArray.shift();
+    const [currentPath, ...remainingPath] = path.split('.');
     let predicate;
 
-    if (pathArray.length === 0) {
+    if (remainingPath.length === 0) {
       predicate = _byPropValue(
         path as keyof TObj,
         value as TObj[keyof TObj],
@@ -77,7 +76,7 @@ export const byPropValue =
     } else {
       const nextLevelObj = obj[currentPath as keyof TObj];
       predicate = byPropValue(
-        pathArray.join('.'),
+        remainingPath.join('.'),
         value as typeof nextLevelObj[keyof typeof nextLevelObj],
         options
       ).bind(null, nextLevelObj);
