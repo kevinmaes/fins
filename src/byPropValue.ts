@@ -1,9 +1,3 @@
-// import curry from 'lodash/curry';
-
-import { curry } from './curry';
-
-// import type { InsertIf } from './types';
-
 interface Options {
   caseInsensitive?: boolean;
   matchUndefined?: boolean;
