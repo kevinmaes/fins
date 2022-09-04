@@ -1,7 +1,7 @@
 import { byPropAtoZ } from './comparators';
 
 describe('comparators', () => {
-  it('should compare two numbers', () => {
+  it('should compare objects by name value', () => {
     const array = [{ name: 'bravo' }, { name: 'alpha' }];
 
     const result = array.sort(byPropAtoZ('name'));
