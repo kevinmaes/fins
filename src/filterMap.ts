@@ -2,12 +2,12 @@ import { curry } from './curry';
 
 // A function that simultanously filters and maps over an array,
 // in a single iteration.
-export const filterMap = <Element, MappedElement>(
-  filter: (arg: Element) => boolean,
-  map: (arg: Element) => MappedElement,
-  array: Element[]
+export const filterMap = <TElement, TMappedElement>(
+  filter: (arg: TElement) => boolean,
+  map: (arg: TElement) => TMappedElement,
+  array: TElement[]
 ) => {
-  const result = array.reduce((acc: MappedElement[], next) => {
+  const result = array.reduce((acc: TMappedElement[], next) => {
     if (filter(next)) {
       acc.push(map(next));
     }
@@ -19,12 +19,12 @@ export const filterMap = <Element, MappedElement>(
 };
 
 // export const filterMap = curry(
-//   <Element, MappedElement>(
-//     filter: (arg: Element) => boolean,
-//     map: (arg: Element) => MappedElement,
-//     array: Element[]
+//   <TElement, TMappedElement>(
+//     filter: (arg: TElement) => boolean,
+//     map: (arg: TElement) => TMappedElement,
+//     array: TElement[]
 //   ) =>
-//     array.reduce((acc: MappedElement[], next) => {
+//     array.reduce((acc: TMappedElement[], next) => {
 //       if (filter(next)) {
 //         acc.push(map(next));
 //       }
