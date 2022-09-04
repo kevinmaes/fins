@@ -12,15 +12,15 @@ interface Options {
  * @returns A function that takes an object argument and returns a boolean as to if a match was found.
  */
 export const byPropValue =
-  <ElementObj>(
-    propName: keyof ElementObj,
-    value: ElementObj[keyof ElementObj],
+  <TObj>(
+    propName: keyof TObj,
+    value: TObj[keyof TObj],
     { caseInsensitive, matchUndefined }: Options = {
       caseInsensitive: false,
       matchUndefined: false,
     }
   ) =>
-  (obj: ElementObj): boolean => {
+  (obj: TObj): boolean => {
     if (typeof obj === 'undefined') return false;
 
     const propValue = obj[propName];
