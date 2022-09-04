@@ -10,7 +10,7 @@ type ArgumentTypes<F extends Function> = F extends (...args: infer A) => any
  * @param {Function} fn
  * @returns {Function}
  */
-export const curry = <Func extends Function>(fn: Func) => {
+export const curry = <TFunc extends Function>(fn: TFunc) => {
   const argsReceived: any[] = [];
   const partial = (...args: any[]) =>
     argsReceived.push(...args) >= fn.length ? fn(...argsReceived) : partial;
