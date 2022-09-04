@@ -1,6 +1,6 @@
 import { byPropValue } from './byPropValue';
 
-describe('byPropValue', () => {
+describe('byPropValue - single level', () => {
   describe('matching primitive value types', () => {
     it('should return false if an object is undefined', () => {
       const subject = byPropValue('propA', 'a');
@@ -281,6 +281,55 @@ describe('byPropValue', () => {
       const result = subject(obj0);
 
       expect(result).toBe(false);
+    });
+  });
+});
+
+describe('byPropValue - nested level', () => {
+  describe('matching primitive value types', () => {
+    it('should return true for a second level matching prop value', () => {
+      const obj = {
+        propA: {
+          propAA: 'aa',
+        },
+      };
+
+      const subject = byPropValue('propA.propAA', 'aa');
+      const result = subject(obj);
+
+      expect(result).toBe(true);
+    });
+
+    it('should return true for a third level matching prop value', () => {
+      const obj = {
+        propA: {
+          propAA: {
+            propAAA: 'aaa',
+          },
+        },
+      };
+
+      const subject = byPropValue('propA.propAA.propAAA', 'aaa');
+      const result = subject(obj);
+
+      expect(result).toBe(true);
+    });
+
+    it('should return true for a fourth level matching prop value', () => {
+      const obj = {
+        propA: {
+          propAA: {
+            propAAA: {
+              propAAAA: 'aaaa',
+            },
+          },
+        },
+      };
+
+      const subject = byPropValue('propA.propAA.propAAA.propAAAA', 'aaaa');
+      const result = subject(obj);
+
+      expect(result).toBe(true);
     });
   });
 });
