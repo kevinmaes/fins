@@ -20,7 +20,7 @@ export const byDeepPropValue =
   <TObj extends Record<string, any>>(
     path: keyof NestedObj<TObj>,
     value: NestedValue<TObj> | any,
-    { caseInsensitive, matchUndefined }: Options = {
+    options: Options = {
       caseInsensitive: false,
       matchUndefined: false,
     }
@@ -33,10 +33,7 @@ export const byDeepPropValue =
       const predicate = byPropValue(
         path as keyof TObj,
         value as TObj[keyof TObj],
-        {
-          caseInsensitive,
-          matchUndefined,
-        }
+        options
       );
       const result = predicate(obj);
       return result;
@@ -45,10 +42,7 @@ export const byDeepPropValue =
       const predicate = byDeepPropValue(
         pathArray.join('.'),
         value as typeof nextLevelObj[keyof typeof nextLevelObj],
-        {
-          caseInsensitive,
-          matchUndefined,
-        }
+        options
       );
       const result = predicate(nextLevelObj);
       return result;
