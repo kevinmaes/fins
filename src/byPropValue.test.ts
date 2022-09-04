@@ -283,4 +283,56 @@ describe('byPropValue', () => {
       expect(result).toBe(false);
     });
   });
+
+  describe('nested level values', () => {
+    it('should return true for a second level matching prop value', () => {
+      const obj = {
+        first: {
+          second: 'value',
+        },
+      };
+
+      const subject = byPropValue('first.second', 'value');
+      const result = subject(obj);
+
+      expect(result).toBe(true);
+    });
+
+    it('should return true for a third level matching prop value', () => {
+      const obj = {
+        first: {
+          second: {
+            third: 'value',
+          },
+        },
+      };
+
+      const subject = byPropValue('first.second.third', 'value');
+      const result = subject(obj);
+
+      expect(result).toBe(true);
+    });
+  });
+
+  describe('arrays', () => {
+    it('should find an array element by matching prop value', () => {
+      const array = [{ prop: 'a' }, { prop: 'b' }, { prop: 'c' }];
+
+      const result = array.find(byPropValue('prop', 'b'));
+
+      expect(result).toEqual({ prop: 'b' });
+    });
+
+    it('should find an array element by matching nested prop value', () => {
+      const array = [
+        { first: { second: 'a' } },
+        { first: { second: 'b' } },
+        { first: { second: 'c' } },
+      ];
+
+      const result = array.find(byPropValue('first.second', 'b'));
+
+      expect(result).toEqual({ first: { second: 'b' } });
+    });
+  });
 });
