@@ -10,10 +10,7 @@ describe('byDeepPropValue', () => {
     //   expect(result).toBe(false);
     // });
 
-    it.only('should return true for a matching number prop value', () => {
-      // interface Obj {
-      //   prop: number;
-      // }
+    it('should return true for a matching number prop value', () => {
       const obj = {
         propA: 'a',
       };
@@ -25,6 +22,20 @@ describe('byDeepPropValue', () => {
 
       // const subject = byDeepPropValue('propA.propAA', 0);
       const subject = byDeepPropValue('propA', 'a');
+      const result = subject(obj);
+
+      expect(result).toBe(true);
+    });
+
+    it('should return true for a matching number prop value', () => {
+      const obj = {
+        propA: {
+          propAA: 'aa',
+        },
+      };
+
+      // const subject = byDeepPropValue('propA.propAA', 0);
+      const subject = byDeepPropValue('propA.propAA', 'aa');
       const result = subject(obj);
 
       expect(result).toBe(true);

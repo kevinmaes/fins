@@ -41,8 +41,8 @@ export const byDeepPropValue =
     } else {
       const nextLevelObj = obj[pathArray[0] as keyof ElementObj];
       const predicate = byPropValue<typeof nextLevelObj>(
-        // pathArray[1] as keyof typeof nextLevelObj,
-        pathArray[1],
+        pathArray[1] as keyof typeof nextLevelObj,
+        // pathArray[1],
         value,
         {
           caseInsensitive,
