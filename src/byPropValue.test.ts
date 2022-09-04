@@ -1,6 +1,6 @@
 import { byPropValue } from './byPropValue';
 
-describe('utils/array.ts #byPropValue()', () => {
+describe('byPropValue', () => {
   describe('matching primitive value types', () => {
     it('should return false if an object is undefined', () => {
       const subject = byPropValue('propA', 'a');
