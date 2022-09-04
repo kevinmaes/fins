@@ -2,40 +2,57 @@ import { byDeepPropValue } from './byDeepPropValue';
 
 describe('byDeepPropValue', () => {
   describe('matching primitive value types', () => {
-    // it('should return false if an object is undefined', () => {
-    //   const subject = byDeepPropValue('propA.propAA', 'a');
-    //   // @ts-expect-error
-    //   const result = subject(undefined);
-
-    //   expect(result).toBe(false);
-    // });
-
-    it('should return true for a matching number prop value', () => {
+    it('should return true for a first level matching prop value', () => {
       const obj = {
         propA: 'a',
       };
-      // const obj = {
-      //   propA: {
-      //     propAA: 'a',
-      //   }
-      // };
 
-      // const subject = byDeepPropValue('propA.propAA', 0);
       const subject = byDeepPropValue('propA', 'a');
       const result = subject(obj);
 
       expect(result).toBe(true);
     });
 
-    it('should return true for a matching number prop value', () => {
+    it('should return true for a second level matching prop value', () => {
       const obj = {
         propA: {
           propAA: 'aa',
         },
       };
 
-      // const subject = byDeepPropValue('propA.propAA', 0);
       const subject = byDeepPropValue('propA.propAA', 'aa');
+      const result = subject(obj);
+
+      expect(result).toBe(true);
+    });
+
+    it('should return true for a third level matching prop value', () => {
+      const obj = {
+        propA: {
+          propAA: {
+            propAAA: 'aaa',
+          },
+        },
+      };
+
+      const subject = byDeepPropValue('propA.propAA.propAAA', 'aaa');
+      const result = subject(obj);
+
+      expect(result).toBe(true);
+    });
+
+    it('should return true for a fourth level matching prop value', () => {
+      const obj = {
+        propA: {
+          propAA: {
+            propAAA: {
+              propAAAA: 'aaaa',
+            },
+          },
+        },
+      };
+
+      const subject = byDeepPropValue('propA.propAA.propAAA.propAAAA', 'aaaa');
       const result = subject(obj);
 
       expect(result).toBe(true);

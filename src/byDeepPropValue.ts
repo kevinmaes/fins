@@ -6,17 +6,7 @@ interface Options {
 }
 
 type NestedObj<TObj> = Record<string, TObj[keyof TObj] | Record<string, TObj>>;
-
-// type NestedValue<TObj> = TObj[keyof TObj] | NestedValue<TObj>];
 type NestedValue<TObj> = NestedObj<TObj>;
-
-// type ValueOrObj<TValue> = TValue | Record<string, ValueOrObj<TValue>>;
-
-// const obj1: ValueOrObj<string> = {
-//   prop: {
-//     prop: 'value',
-//   },
-// }
 
 /**
  *
@@ -37,9 +27,9 @@ export const byDeepPropValue =
   ) =>
   (obj: TObj): boolean => {
     const pathArray = path.split('.');
-    const pathArrayLength = pathArray.length;
+    const thisPathFragment = pathArray.shift();
 
-    if (path in obj) {
+    if (pathArray.length === 0) {
       const predicate = byPropValue(
         path as keyof TObj,
         value as TObj[keyof TObj],
@@ -51,9 +41,9 @@ export const byDeepPropValue =
       const result = predicate(obj);
       return result;
     } else {
-      const nextLevelObj = obj[pathArray[0] as keyof TObj];
-      const predicate = byPropValue<typeof nextLevelObj>(
-        pathArray[1] as keyof typeof nextLevelObj,
+      const nextLevelObj = obj[thisPathFragment as keyof TObj];
+      const predicate = byDeepPropValue(
+        pathArray.join('.'),
         value as typeof nextLevelObj[keyof typeof nextLevelObj],
         {
           caseInsensitive,
@@ -65,25 +55,4 @@ export const byDeepPropValue =
     }
 
     return false;
-
-    // if (typeof obj === 'undefined') return false;
-
-    // const propValue = obj[propName];
-    // if (typeof propValue === 'undefined') {
-    //   if (matchUndefined) {
-    //     return typeof value === 'undefined';
-    //   }
-    //   return false;
-    // }
-
-    // if (typeof propValue !== typeof value) return false;
-
-    // const valuesAreStrings =
-    //   typeof propValue === 'string' && typeof value === 'string';
-
-    // if (valuesAreStrings && caseInsensitive) {
-    //   return propValue.toLocaleLowerCase() === value.toLowerCase();
-    // }
-
-    // return propValue === value;
   };
