@@ -15,31 +15,31 @@ interface Options {
  */
 
 export const byDeepPropValue =
-  <ElementObj>(
-    // path: string extends keyof ElementObj ? string : never,
-    path: string extends keyof ElementObj ? keyof Element : string,
-    value: ElementObj[keyof ElementObj],
+  <TObj>(
+    // path: string extends keyof TObj ? string : never,
+    path: string extends keyof TObj ? keyof Element : string,
+    value: TObj[keyof TObj],
     // value:
-    //   | ElementObj[keyof ElementObj]
-    //   | ElementObj[keyof ElementObj][keyof ElementObj[keyof ElementObj]],
+    //   | TObj[keyof TObj]
+    //   | TObj[keyof TObj][keyof TObj[keyof TObj]],
     { caseInsensitive, matchUndefined }: Options = {
       caseInsensitive: false,
       matchUndefined: false,
     }
   ) =>
-  (obj: ElementObj): boolean => {
+  (obj: TObj): boolean => {
     const pathArray = path.split('.');
     const pathArrayLength = pathArray.length;
 
     if (path in obj) {
-      const predicate = byPropValue(path as keyof ElementObj, value, {
+      const predicate = byPropValue(path as keyof TObj, value, {
         caseInsensitive,
         matchUndefined,
       });
       const result = predicate(obj);
       return result;
     } else {
-      const nextLevelObj = obj[pathArray[0] as keyof ElementObj];
+      const nextLevelObj = obj[pathArray[0] as keyof TObj];
       const predicate = byPropValue<typeof nextLevelObj>(
         pathArray[1] as keyof typeof nextLevelObj,
         // pathArray[1],
