@@ -289,12 +289,12 @@ describe('byPropValue - nested level', () => {
   describe('matching primitive value types', () => {
     it('should return true for a second level matching prop value', () => {
       const obj = {
-        propA: {
-          propAA: 'aa',
+        first: {
+          second: 'value',
         },
       };
 
-      const subject = byPropValue('propA.propAA', 'aa');
+      const subject = byPropValue('first.second', 'value');
       const result = subject(obj);
 
       expect(result).toBe(true);
@@ -302,31 +302,14 @@ describe('byPropValue - nested level', () => {
 
     it('should return true for a third level matching prop value', () => {
       const obj = {
-        propA: {
-          propAA: {
-            propAAA: 'aaa',
+        first: {
+          second: {
+            third: 'value',
           },
         },
       };
 
-      const subject = byPropValue('propA.propAA.propAAA', 'aaa');
-      const result = subject(obj);
-
-      expect(result).toBe(true);
-    });
-
-    it('should return true for a fourth level matching prop value', () => {
-      const obj = {
-        propA: {
-          propAA: {
-            propAAA: {
-              propAAAA: 'aaaa',
-            },
-          },
-        },
-      };
-
-      const subject = byPropValue('propA.propAA.propAAA.propAAAA', 'aaaa');
+      const subject = byPropValue('first.second.third', 'value');
       const result = subject(obj);
 
       expect(result).toBe(true);
