@@ -1,6 +1,6 @@
 import { byPropValue } from './byPropValue';
 
-describe('byPropValue - single level', () => {
+describe('byPropValue', () => {
   describe('matching primitive value types', () => {
     it('should return false if an object is undefined', () => {
       const subject = byPropValue('propA', 'a');
@@ -283,10 +283,8 @@ describe('byPropValue - single level', () => {
       expect(result).toBe(false);
     });
   });
-});
 
-describe('byPropValue - nested level', () => {
-  describe('matching primitive value types', () => {
+  describe('nested level values', () => {
     it('should return true for a second level matching prop value', () => {
       const obj = {
         first: {
