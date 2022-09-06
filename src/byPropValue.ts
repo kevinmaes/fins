@@ -1,24 +1,10 @@
+import { NestedObj, NestedValue } from './types/types';
+import { _get } from './_internal/_get';
+
 interface Options {
   caseInsensitive?: boolean;
   matchUndefined?: boolean;
 }
-
-type NestedObj<TObj> = Record<string, TObj[keyof TObj] | Record<string, TObj>>;
-type NestedValue<TObj> = NestedObj<TObj>;
-
-const _get = <TObj>(
-  path: keyof NestedObj<TObj>,
-  obj: TObj
-): NestedValue<TObj> | any => {
-  const [currentPath, ...remainingPath] = path.split('.');
-  if (remainingPath.length === 0) {
-    if (currentPath in obj) {
-      return obj[currentPath as keyof TObj];
-    }
-    return undefined;
-  }
-  return _get(remainingPath.join('.'), obj[currentPath as keyof TObj]);
-};
 
 /**
  *
