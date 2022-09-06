@@ -1,6 +1,4 @@
-export * from './filterMap';
-
-// import { curry } from './curry';
-// import * as filterMapModule from './filterMap';
-
-// export const filterMap = curry(filterMapModule.filterMap);
+export { filterMap } from './filterMap';
+export { byPropValue } from './byPropValue';
+export { byPropAtoZ } from './comparators';
+export { insertIf } from './insertIf';
