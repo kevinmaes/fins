@@ -11,7 +11,7 @@ describe('comparators', () => {
     expect(result).toEqual([{ name: 'alpha' }, { name: 'bravo' }]);
   });
 
-  it.skip('should compare objects by nested name value', () => {
+  it('should compare objects by nested name value', () => {
     const array = [
       { nested: { name: 'bravo' } },
       { nested: { name: 'alpha' } },
@@ -19,6 +19,9 @@ describe('comparators', () => {
 
     const result = array.sort(byPropAtoZ('nested.name'));
 
-    expect(result).toEqual([{ name: 'alpha' }, { name: 'bravo' }]);
+    expect(result).toEqual([
+      { nested: { name: 'alpha' } },
+      { nested: { name: 'bravo' } },
+    ]);
   });
 });
