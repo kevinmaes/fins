@@ -1,6 +1,6 @@
 {
   "name": "fins",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "dist/index.js",
   "description": "Little TypeScript library of callback functions, mostly for array methods like map/filter/reduce and sorting.",
   "repository": "git@github.com:kevinmaes/fins",
