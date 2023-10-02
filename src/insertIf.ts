@@ -1,9 +1,3 @@
-// eslint-disable-next-line import/no-unused-modules
-export type InsertIf<TElement> = (
-  elements: TElement | TElement[],
-  condition: boolean
-) => TElement[];
-
 /**
  * Conditionally insert one or more elements into an array.
  * @param elements A single element or an array of elements to be inserted if the condition is met
@@ -21,7 +15,12 @@ export type InsertIf<TElement> = (
  *  const array = [0, insertIf(1, true), 2]; // => [0, [1], 2]
  *
  */
-export const insertIf: InsertIf<any> = (elements, condition) =>
-  typeof condition === 'boolean' && condition
-    ? Array.from([elements]).flat()
-    : [];
+export function insertIf<TElement extends any>(
+  elements: TElement | TElement[],
+  condition: boolean //| (...args: any[]) => boolean
+): TElement[] {
+  if (typeof condition === 'boolean' && condition) {
+    return Array.isArray(elements) ? elements : [elements];
+  }
+  return [];
+}

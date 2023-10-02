@@ -1,5 +1,4 @@
-import { NestedObj, NestedValue } from './types/types';
-import { _get } from './_internal/_get';
+import { NestedKeyOf, StringThing, _get } from './_internal/_get';
 
 interface Options {
   caseInsensitive?: boolean;
@@ -14,19 +13,21 @@ interface Options {
  * @param insensitive For strings, whether matching is case-insensitive, default is false.
  * @returns A function that takes an object argument and returns a boolean as to if a match was found.
  */
-export const byPropValue =
-  <TObj extends Record<string, any>>(
-    path: keyof NestedObj<TObj>,
-    targetValue: NestedValue<TObj> | any,
-    { matchUndefined, caseInsensitive }: Options = {
-      caseInsensitive: false,
-      matchUndefined: false,
-    }
-  ) =>
-  (obj: TObj): boolean => {
+// export type NestedObj<TObj> = Record<string, TObj | Record<string, TObj>>;
+// export type NestedValue<TObj> = TObj[keyof TObj]; // NestedObj<TObj>[keyof NestedObj<TObj>];
+
+export function byPropValue<ObjectType extends StringThing>(
+  path: NestedKeyOf<ObjectType>,
+  targetValue: ObjectType[keyof ObjectType & string],
+  { matchUndefined, caseInsensitive }: Options = {
+    caseInsensitive: false,
+    matchUndefined: false,
+  }
+) {
+  return (obj: ObjectType): boolean => {
     if (typeof obj === 'undefined') return false;
 
-    const propValue = _get(path, obj);
+    const propValue = _get(obj, path);
     if (typeof propValue === 'undefined') {
       if (matchUndefined) {
         return typeof targetValue === 'undefined';
@@ -45,3 +46,4 @@ export const byPropValue =
 
     return propValue === targetValue;
   };
+}
