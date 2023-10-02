@@ -1,4 +1,4 @@
-import { NestedKeyOf, StringThing, _get } from './_internal/_get';
+import { NestedKeyOf, ObjectType, _get } from './_internal/_get';
 
 interface Options {
   caseInsensitive?: boolean;
@@ -16,7 +16,7 @@ interface Options {
 // export type NestedObj<TObj> = Record<string, TObj | Record<string, TObj>>;
 // export type NestedValue<TObj> = TObj[keyof TObj]; // NestedObj<TObj>[keyof NestedObj<TObj>];
 
-export function byPropValue<ObjectType extends StringThing>(
+export function byPropValue<ObjectType extends ObjectType>(
   path: NestedKeyOf<ObjectType>,
   targetValue: ObjectType[keyof ObjectType & string],
   { matchUndefined, caseInsensitive }: Options = {

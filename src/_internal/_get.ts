@@ -14,9 +14,9 @@ export type NestedKeyOf<ObjectType> = {
 //
 type Primitive = number | boolean | string | null | undefined;
 
-export type StringThing = { [key: string]: StringThing | Primitive };
+export type ObjectType = { [key: string]: ObjectType | Primitive };
 
-export function _get<T extends StringThing>(obj: T, path: NestedKeyOf<T>) {
+export function _get<T extends ObjectType>(obj: T, path: NestedKeyOf<T>) {
   const pathParts = path.split('.');
   const firstPart = pathParts[0];
 
