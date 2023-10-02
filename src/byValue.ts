@@ -1,4 +1,4 @@
-import { _get } from './_internal/_get';
+import { get } from './get';
 
 interface Options {
   caseInsensitive?: boolean;

@@ -16,7 +16,7 @@ type Primitive = number | boolean | string | null | undefined;
 
 export type ObjectType = { [key: string]: ObjectType | Primitive };
 
-export function _get<T extends ObjectType>(obj: T, path: NestedKeyOf<T>) {
+export function get<T extends ObjectType>(obj: T, path: NestedKeyOf<T>) {
   const pathParts = path.split('.');
   const firstPart = pathParts[0];
 
@@ -30,6 +30,6 @@ export function _get<T extends ObjectType>(obj: T, path: NestedKeyOf<T>) {
 
   const nextObj = obj[pathParts[0]];
   if (nextObj && typeof nextObj === 'object' && !Array.isArray(nextObj)) {
-    return _get(nextObj, pathParts.slice(1).join('.'));
+    return get(nextObj, pathParts.slice(1).join('.'));
   }
 }

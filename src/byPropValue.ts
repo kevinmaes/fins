@@ -1,4 +1,4 @@
-import { NestedKeyOf, ObjectType, _get } from './_internal/_get';
+import { NestedKeyOf, ObjectType, get } from './get';
 
 interface Options {
   caseInsensitive?: boolean;
@@ -16,9 +16,9 @@ interface Options {
 // export type NestedObj<TObj> = Record<string, TObj | Record<string, TObj>>;
 // export type NestedValue<TObj> = TObj[keyof TObj]; // NestedObj<TObj>[keyof NestedObj<TObj>];
 
-export function byPropValue<ObjectType extends ObjectType>(
-  path: NestedKeyOf<ObjectType>,
-  targetValue: ObjectType[keyof ObjectType & string],
+export function byPropValue<T extends ObjectType>(
+  path: NestedKeyOf<T>,
+  targetValue: T[keyof T & string],
   { matchUndefined, caseInsensitive }: Options = {
     caseInsensitive: false,
     matchUndefined: false,
@@ -27,7 +27,7 @@ export function byPropValue<ObjectType extends ObjectType>(
   return (obj: ObjectType): boolean => {
     if (typeof obj === 'undefined') return false;
 
-    const propValue = _get(obj, path);
+    const propValue = get(obj, path);
     if (typeof propValue === 'undefined') {
       if (matchUndefined) {
         return typeof targetValue === 'undefined';

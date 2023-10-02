@@ -1,4 +1,4 @@
-import { NestedKeyOf, _get } from './_internal/_get';
+import { NestedKeyOf, get } from './get';
 // import { NestedObj } from './byPropValue';
 
 type Comparator<TElement extends string | number | object> = (
@@ -24,8 +24,8 @@ export function byPropAtoZ<TObj extends Record<string, any>>(
   path: NestedKeyOf<TObj>
 ): Comparator<TObj> {
   return (a, b) => {
-    const aValue = _get(a, path);
-    const bValue = _get(b, path);
+    const aValue = get(a, path);
+    const bValue = get(b, path);
 
     if (!aValue) {
       return -1;
