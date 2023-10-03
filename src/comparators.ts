@@ -1,9 +1,9 @@
 import { get } from './get';
 import { NestedKeyOf } from './types';
 
-type Comparator<TElement extends string | number | object> = (
-  a: TElement,
-  b: TElement
+type Comparator<T extends string | number | object> = (
+  a: T,
+  b: T
 ) => -1 | 0 | 1;
 
 /**
