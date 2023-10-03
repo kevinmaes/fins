@@ -1,18 +1,21 @@
-// obj = { prop1: 'value1' };
-// path = 'prop1';
-// => 'value1'
-//
-// obj = { prop1: { nestedProp1: 'nestedValue1' } };
-// path = 'prop1.nestedProp1';
-// => 'nestedValue1'
+import { NestedKeyOf, ObjectType } from './types';
 
-import { NestedKeyOf } from './types';
-
-//
-type Primitive = number | boolean | string | null | undefined;
-
-export type ObjectType = { [key: string]: ObjectType | Primitive };
-
+/**
+ *
+ * @example
+ * obj = { prop1: 'value1' };
+ * path = 'prop1';
+ * => 'value1'
+ *
+ * @example
+ * obj = { prop1: { nestedProp1: 'nestedValue1' } };
+ * path = 'prop1.nestedProp1';
+ * => 'nestedValue1'
+ *
+ * @param obj
+ * @param path
+ * @returns
+ */
 export function get<T extends ObjectType>(obj: T, path: NestedKeyOf<T>) {
   const pathParts = path.split('.');
   const firstPart = pathParts[0];

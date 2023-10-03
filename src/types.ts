@@ -9,3 +9,7 @@ export type NestedKeyOf<ObjectType> = {
     ? `${Key}.${NestedKeyOf<ObjectType[Key]>}`
     : Key;
 }[keyof ObjectType & string];
+
+type Primitive = number | boolean | string | null | undefined;
+
+export type ObjectType = { [key: string]: ObjectType | Primitive };

@@ -1,5 +1,5 @@
-import { ObjectType, get } from './get';
-import { NestedKeyOf } from './types';
+import { get } from './get';
+import { NestedKeyOf, ObjectType } from './types';
 
 interface Options {
   caseInsensitive?: boolean;
