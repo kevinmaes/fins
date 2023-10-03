@@ -1,5 +1,4 @@
 import { get } from './get';
-import { NestedKeyOf, ObjectType } from './types';
 
 interface Options {
   caseInsensitive?: boolean;
@@ -14,34 +13,32 @@ interface Options {
  * @param insensitive For strings, whether matching is case-insensitive, default is false.
  * @returns A function that takes an object argument and returns a boolean as to if a match was found.
  */
-export function byPropValue<T extends ObjectType>(
-  path: NestedKeyOf<T>,
-  targetValue: T[keyof T & string],
+export function byValue<TVal extends any>(
+  targetValue: TVal,
   { matchUndefined, caseInsensitive }: Options = {
     caseInsensitive: false,
     matchUndefined: false,
   }
 ) {
-  return (obj: ObjectType): boolean => {
-    if (typeof obj === 'undefined') return false;
+  return (val: TVal): boolean => {
+    if (typeof val === 'undefined') return false;
 
-    const propValue = get(obj, path);
-    if (typeof propValue === 'undefined') {
+    if (typeof val === 'undefined') {
       if (matchUndefined) {
-        return typeof targetValue === 'undefined';
+        return typeof val === 'undefined';
       }
       return false;
     }
 
-    if (typeof propValue !== typeof targetValue) return false;
+    if (typeof val !== typeof targetValue) return false;
 
     const valuesAreStrings =
-      typeof propValue === 'string' && typeof targetValue === 'string';
+      typeof val === 'string' && typeof targetValue === 'string';
 
     if (valuesAreStrings && caseInsensitive) {
-      return propValue.toLocaleLowerCase() === targetValue.toLowerCase();
+      return val.toLocaleLowerCase() === targetValue.toLowerCase();
     }
 
-    return propValue === targetValue;
+    return val === targetValue;
   };
 }

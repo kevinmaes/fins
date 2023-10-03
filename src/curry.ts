@@ -1,6 +1,4 @@
-type ArgumentTypes<F extends Function> = F extends (...args: infer A) => any
-  ? A
-  : never;
+import { ArgumentTypes } from './types';
 
 /**
  * Creates a function that accepts arguments of fn and either invokes
@@ -10,11 +8,12 @@ type ArgumentTypes<F extends Function> = F extends (...args: infer A) => any
  * @param {Function} fn
  * @returns {Function}
  */
-export const curry = <TFunc extends Function>(fn: TFunc) => {
+export function curry<TFunc extends Function>(fn: TFunc) {
   const argsReceived: any[] = [];
-  const partial = (...args: ArgumentTypes<TFunc>) =>
-    argsReceived.push(...args) >= fn.length
+  function partial(...args: ArgumentTypes<TFunc>[number][]) {
+    return argsReceived.push(...args) >= fn.length
       ? fn(...argsReceived.slice(0, fn.length))
       : partial;
+  }
   return partial;
-};
+}
