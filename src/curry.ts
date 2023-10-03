@@ -12,10 +12,10 @@ type ArgumentTypes<F extends Function> = F extends (...args: infer A) => any
  */
 export function curry<TFunc extends Function>(fn: TFunc) {
   const argsReceived: any[] = [];
-  function partial(...args: ArgumentTypes<TFunc>) {
+  function partial(...args: ArgumentTypes<TFunc>[number][]) {
     return argsReceived.push(...args) >= fn.length
       ? fn(...argsReceived.slice(0, fn.length))
       : partial;
-    return partial;
   }
+  return partial;
 }
