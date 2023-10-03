@@ -1,6 +1,6 @@
 import { byValue } from './byValue';
 
-describe.only('byValue', () => {
+describe('byValue', () => {
   describe('matching primitive value types', () => {
     it('should return false if an object is undefined', () => {
       const subject = byValue(undefined);
@@ -14,6 +14,38 @@ describe.only('byValue', () => {
       const subject = byValue(undefined, { matchUndefined: true });
 
       const result = subject(undefined);
+
+      expect(result).toBe(true);
+    });
+
+    it('should return false if the value is of a different type than expected', () => {
+      const subject = byValue(1);
+
+      const result = subject('1');
+
+      expect(result).toBe(false);
+    });
+
+    it('should return true if string values match as well as case', () => {
+      const subject = byValue('test');
+
+      const result = subject('test');
+
+      expect(result).toBe(true);
+    });
+
+    it('should return false if string values match but case does not', () => {
+      const subject = byValue('test');
+
+      const result = subject('Test');
+
+      expect(result).toBe(false);
+    });
+
+    it('should return true if string values match and caseInsensitive is specified', () => {
+      const subject = byValue('test', { caseInsensitive: true });
+
+      const result = subject('Test');
 
       expect(result).toBe(true);
     });
