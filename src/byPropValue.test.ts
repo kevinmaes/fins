@@ -76,7 +76,7 @@ describe('byPropValue', () => {
       expect(result).toBe(false);
     });
 
-    it.only('should return false if the prop value and value are of different types', () => {
+    it('should return false if the prop value and value are of different types', () => {
       const obj = {
         prop: 0,
       };
