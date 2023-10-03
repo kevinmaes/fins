@@ -1,5 +1,5 @@
-import { NestedKeyOf, get } from './get';
-// import { NestedObj } from './byPropValue';
+import { get } from './get';
+import { NestedKeyOf } from './types';
 
 type Comparator<TElement extends string | number | object> = (
   a: TElement,
@@ -7,11 +7,11 @@ type Comparator<TElement extends string | number | object> = (
 ) => -1 | 0 | 1;
 
 /**
+ * Sort an array of objects by a property value, even if it's a value at a nested path.
  * arr = [
  *  { name: 'a', age: { nested: 'a' } },
  *  { name: 'b', age: { nested: 'a' } },
  * ]
- *
  *
  * arr.sort(byPropAtoZ('name'))
  * arr.sort(byPropAtoZ('age.nested'))
@@ -19,7 +19,6 @@ type Comparator<TElement extends string | number | object> = (
  * @param path
  * @returns
  */
-
 export function byPropAtoZ<TObj extends Record<string, any>>(
   path: NestedKeyOf<TObj>
 ): Comparator<TObj> {
