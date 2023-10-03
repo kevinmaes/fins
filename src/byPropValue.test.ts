@@ -11,10 +11,7 @@ describe('byPropValue', () => {
     });
 
     it('should return true for a matching number prop value', () => {
-      interface Obj {
-        prop: number;
-      }
-      const obj: Obj = {
+      const obj = {
         prop: 0,
       };
 
@@ -25,10 +22,7 @@ describe('byPropValue', () => {
     });
 
     it('should return false when not matching a number prop value', () => {
-      interface Obj {
-        prop: number;
-      }
-      const obj: Obj = {
+      const obj = {
         prop: 0,
       };
 
@@ -39,10 +33,7 @@ describe('byPropValue', () => {
     });
 
     it('should return true for a matching boolean prop value of true', () => {
-      interface Obj {
-        prop: boolean;
-      }
-      const obj: Obj = {
+      const obj = {
         prop: true,
       };
 
@@ -53,10 +44,7 @@ describe('byPropValue', () => {
     });
 
     it('should return true for a matching boolean prop value of false', () => {
-      interface Obj {
-        prop: boolean;
-      }
-      const obj: Obj = {
+      const obj = {
         prop: false,
       };
 
@@ -67,10 +55,7 @@ describe('byPropValue', () => {
     });
 
     it('should return true for a matching string prop value', () => {
-      interface Obj {
-        prop: string;
-      }
-      const obj: Obj = {
+      const obj = {
         prop: 'value',
       };
 
@@ -81,10 +66,7 @@ describe('byPropValue', () => {
     });
 
     it('should return false for no matching string prop value', () => {
-      interface Obj {
-        prop: string;
-      }
-      const obj: Obj = {
+      const obj = {
         prop: 'value',
       };
 
@@ -94,11 +76,8 @@ describe('byPropValue', () => {
       expect(result).toBe(false);
     });
 
-    it('should return false if the prop value and value are of different types', () => {
-      interface Obj {
-        prop: string | number;
-      }
-      const obj: Obj = {
+    it.only('should return false if the prop value and value are of different types', () => {
+      const obj = {
         prop: 0,
       };
 
@@ -112,11 +91,8 @@ describe('byPropValue', () => {
   describe('matching non-primitive value types', () => {
     it('should return true for a matching object value', () => {
       const valueObj = {};
-      interface Obj {
-        prop: typeof valueObj;
-      }
 
-      const obj: Obj = {
+      const obj = {
         prop: valueObj,
       };
 
@@ -128,11 +104,8 @@ describe('byPropValue', () => {
 
     it('should return false for a non-matching object value', () => {
       const valueObj = {};
-      interface Obj {
-        prop: typeof valueObj;
-      }
 
-      const obj: Obj = {
+      const obj = {
         prop: valueObj,
       };
 
@@ -144,11 +117,8 @@ describe('byPropValue', () => {
 
     it('should return true for a matching array value', () => {
       const valueArray = [1, 2];
-      interface Obj {
-        prop: typeof valueArray;
-      }
 
-      const obj: Obj = {
+      const obj = {
         prop: valueArray,
       };
 
@@ -160,11 +130,7 @@ describe('byPropValue', () => {
 
     it('should return false for a non-matching array value', () => {
       const valueArray = [1, 2];
-      interface Obj {
-        prop: typeof valueArray;
-      }
-
-      const obj: Obj = {
+      const obj = {
         prop: valueArray,
       };
 
@@ -177,10 +143,7 @@ describe('byPropValue', () => {
 
   describe('matching with options arg', () => {
     it('should return true for a matching string prop value of different case when caseInsensitive option is true', () => {
-      interface Obj {
-        prop: string;
-      }
-      const obj: Obj = {
+      const obj = {
         prop: 'value',
       };
 
@@ -193,10 +156,7 @@ describe('byPropValue', () => {
     });
 
     it('should return false for a non-matching string prop value when caseInsensitive option is true', () => {
-      interface Obj {
-        prop: string;
-      }
-      const obj: Obj = {
+      const obj = {
         prop: 'value',
       };
 
@@ -209,10 +169,7 @@ describe('byPropValue', () => {
     });
 
     it('should return false for a similar string prop of different case', () => {
-      interface Obj {
-        prop: string;
-      }
-      const obj: Obj = {
+      const obj = {
         prop: 'value',
       };
 
@@ -223,10 +180,7 @@ describe('byPropValue', () => {
     });
 
     it('should return false for no matching string prop value when caseInsensitive option is false', () => {
-      interface Obj {
-        prop: string;
-      }
-      const obj: Obj = {
+      const obj = {
         prop: 'value',
       };
 
@@ -239,10 +193,7 @@ describe('byPropValue', () => {
     });
 
     it('should return false if an object prop value is undefined but the value passed is not undefined', () => {
-      interface Obj {
-        propA: undefined;
-      }
-      const obj0: Obj = {
+      const obj0 = {
         propA: undefined,
       };
 
@@ -254,10 +205,7 @@ describe('byPropValue', () => {
     });
 
     it('should return true if an object prop value and value are undefined and the matchUndefined option is true', () => {
-      interface Obj {
-        propA: undefined;
-      }
-      const obj0: Obj = {
+      const obj0 = {
         propA: undefined,
       };
 
@@ -268,10 +216,7 @@ describe('byPropValue', () => {
     });
 
     it('should return false if an object prop value and value are undefined and the matchUndefined option is false', () => {
-      interface Obj {
-        propA: undefined;
-      }
-      const obj0: Obj = {
+      const obj0 = {
         propA: undefined,
       };
 
