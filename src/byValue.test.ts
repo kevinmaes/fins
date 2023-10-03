@@ -18,14 +18,6 @@ describe('byValue', () => {
       expect(result).toBe(true);
     });
 
-    it('should return false if the value is of a different type than expected', () => {
-      const subject = byValue(1);
-
-      const result = subject('1');
-
-      expect(result).toBe(false);
-    });
-
     it('should return true if string values match as well as case', () => {
       const subject = byValue('test');
 

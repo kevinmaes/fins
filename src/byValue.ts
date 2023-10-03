@@ -28,8 +28,6 @@ export function byValue<TVal extends any>(
       return false;
     }
 
-    if (typeof val !== typeof targetValue) return false;
-
     const valuesAreStrings =
       typeof val === 'string' && typeof targetValue === 'string';
 
