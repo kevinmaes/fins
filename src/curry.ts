@@ -1,6 +1,4 @@
-type ArgumentTypes<F extends Function> = F extends (...args: infer A) => any
-  ? A
-  : never;
+import { ArgumentTypes } from './types';
 
 /**
  * Creates a function that accepts arguments of fn and either invokes

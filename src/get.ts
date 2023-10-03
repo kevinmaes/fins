@@ -1,9 +1,3 @@
-export type NestedKeyOf<ObjectType> = {
-  [Key in keyof ObjectType & string]: ObjectType[Key] extends object
-    ? `${Key}.${NestedKeyOf<ObjectType[Key]>}`
-    : Key;
-}[keyof ObjectType & string];
-
 // obj = { prop1: 'value1' };
 // path = 'prop1';
 // => 'value1'
@@ -11,6 +5,9 @@ export type NestedKeyOf<ObjectType> = {
 // obj = { prop1: { nestedProp1: 'nestedValue1' } };
 // path = 'prop1.nestedProp1';
 // => 'nestedValue1'
+
+import { NestedKeyOf } from './types';
+
 //
 type Primitive = number | boolean | string | null | undefined;
 
