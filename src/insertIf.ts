@@ -13,7 +13,6 @@
  *  const array = [0, ...insertIf(1, true), 2]; // => [0, 1, 2]
  *  // Doing the following without `...` will insert a nested array.
  *  const array = [0, insertIf(1, true), 2]; // => [0, [1], 2]
- *
  */
 export function insertIf<TElement extends any>(
   elements: TElement | TElement[],

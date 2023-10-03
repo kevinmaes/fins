@@ -1,4 +1,5 @@
-import { NestedKeyOf, ObjectType, get } from './get';
+import { ObjectType, get } from './get';
+import { NestedKeyOf } from './types';
 
 interface Options {
   caseInsensitive?: boolean;
@@ -13,9 +14,6 @@ interface Options {
  * @param insensitive For strings, whether matching is case-insensitive, default is false.
  * @returns A function that takes an object argument and returns a boolean as to if a match was found.
  */
-// export type NestedObj<TObj> = Record<string, TObj | Record<string, TObj>>;
-// export type NestedValue<TObj> = TObj[keyof TObj]; // NestedObj<TObj>[keyof NestedObj<TObj>];
-
 export function byPropValue<T extends ObjectType>(
   path: NestedKeyOf<T>,
   targetValue: T[keyof T & string],
