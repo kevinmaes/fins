@@ -8,9 +8,9 @@ import { ArgumentTypes } from './types';
  * @param {Function} fn
  * @returns {Function}
  */
-export function curry<TFunc extends Function>(fn: TFunc) {
+export function curry<T extends Function>(fn: T) {
   const argsReceived: any[] = [];
-  function partial(...args: ArgumentTypes<TFunc>[number][]) {
+  function partial(...args: ArgumentTypes<T>[number][]) {
     return argsReceived.push(...args) >= fn.length
       ? fn(...argsReceived.slice(0, fn.length))
       : partial;
