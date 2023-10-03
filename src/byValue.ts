@@ -21,16 +21,12 @@ export function byValue<TVal extends any>(
   }
 ) {
   return (val: TVal): boolean => {
-    if (typeof val === 'undefined') return false;
-
     if (typeof val === 'undefined') {
       if (matchUndefined) {
         return typeof val === 'undefined';
       }
       return false;
     }
-
-    if (typeof val !== typeof targetValue) return false;
 
     const valuesAreStrings =
       typeof val === 'string' && typeof targetValue === 'string';
