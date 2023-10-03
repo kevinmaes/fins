@@ -26,11 +26,12 @@ export function byPropAtoZ<TObj extends Record<string, any>>(
     const aValue = get(a, path);
     const bValue = get(b, path);
 
+    // nulls and undefineds should be sorted to the end of the array
     if (!aValue) {
-      return -1;
+      return 1;
     }
     if (!bValue) {
-      return 1;
+      return -1;
     }
 
     if (aValue < bValue) {
