@@ -16,7 +16,7 @@
  */
 export function insertIf<T extends any>(
   elements: T | T[],
-  condition: boolean //| (...args: any[]) => boolean
+  condition: boolean
 ): T[] {
   if (typeof condition === 'boolean' && condition) {
     return Array.isArray(elements) ? elements : [elements];
