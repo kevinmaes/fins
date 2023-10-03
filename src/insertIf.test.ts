@@ -3,9 +3,9 @@ import { insertIf } from './insertIf';
 describe('utils/array.ts #insertIf()', () => {
   describe('matching primitive value types', () => {
     it('should insert a single element when predicate arg is true', () => {
-      // const subject = insertIf(1, true);
+      const subject = insertIf(1, true);
 
-      const result = [0, ...insertIf(1, true), 2];
+      const result = [0, ...subject, 2];
 
       expect(result).toEqual([0, 1, 2]);
     });

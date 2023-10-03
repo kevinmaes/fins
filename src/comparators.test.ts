@@ -1,6 +1,6 @@
 import { byPropAtoZ } from './comparators';
 
-describe.only('comparators', () => {
+describe('comparators', () => {
   it('should sort null values to the start of the array', () => {
     const array = [
       { name: 'alpha' },
