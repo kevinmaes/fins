@@ -14,10 +14,7 @@
  *  // Doing the following without `...` will insert a nested array.
  *  const array = [0, insertIf(1, true), 2]; // => [0, [1], 2]
  */
-export function insertIf<T extends any>(
-  elements: T | T[],
-  condition: boolean
-): T[] {
+export function insertIf<T>(elements: T | T[], condition: boolean): T[] {
   if (typeof condition === 'boolean' && condition) {
     return Array.isArray(elements) ? elements : [elements];
   }
